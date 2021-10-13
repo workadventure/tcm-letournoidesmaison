@@ -1,23 +1,28 @@
 /// <reference path="../node_modules/@workadventure/iframe-api-typings/iframe_api.d.ts" />
+import {bootstrapExtra} from '@workadventure/scripting-api-extra'
 
-import {bootstrapExtra} from "@workadventure/scripting-api-extra";
+bootstrapExtra().catch((e) => console.error('bootstrapExtra', e));
 
-// The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure.
-bootstrapExtra().catch(e => console.error(e));
+console.log('Script started successfully');
 
-let currentPopup: any = undefined;
-const today = new Date();
-const time = today.getHours() + ":" + today.getMinutes();
+// Manage Red door
+WA.room.onEnterZone('doorRedZoneOpened', () => WA.room.hideLayer('doorRedClosed'));
+WA.room.onEnterZone('doorRedZoneClosed', () => WA.room.showLayer('doorRedClosed'));
 
-WA.room.onEnterZone('clock', () => {
-    currentPopup =  WA.ui.openPopup("clockPopup","It's " + time,[]);
-})
+// Manage Blue door
+WA.room.onEnterZone('doorBlueZoneOpened', () => WA.room.hideLayer('doorBlueClosed'));
+WA.room.onEnterZone('doorBlueZoneClosed', () => WA.room.showLayer('doorBlueClosed'));
 
-WA.room.onLeaveZone('clock', closePopUp)
+// Manage Purple door
+WA.room.onEnterZone('doorPurpleZoneOpened', () => WA.room.hideLayer('doorPurpleClosed'));
+WA.room.onEnterZone('doorPurpleZoneClosed', () => WA.room.showLayer('doorPurpleClosed'));
 
-function closePopUp(){
-    if (currentPopup !== undefined) {
-        currentPopup.close();
-        currentPopup = undefined;
-    }
-}
+// Manage Yellow door
+WA.room.onEnterZone('doorYellowZoneOpened', () => {
+    console.log('doorYellowZoneOpened => onEnterZone')
+    WA.room.hideLayer('doorYellowClosed')
+});
+WA.room.onEnterZone('doorYellowZoneClosed', () => {
+    console.log('doorYellowZoneClosed => onEnterZone')
+    WA.room.showLayer('doorYellowClosed')
+});
