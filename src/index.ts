@@ -3,7 +3,7 @@ import {bootstrapExtra} from '@workadventure/scripting-api-extra'
 
 bootstrapExtra().catch((e) => console.error('bootstrapExtra', e));
 
-console.log('Script started successfully');
+console.log('Script Le Tournoi des Maisons successfully');
 
 // Manage Red door
 WA.room.onEnterZone('doorRedZoneOpened', () => {
