@@ -6,23 +6,37 @@ bootstrapExtra().catch((e) => console.error('bootstrapExtra', e));
 console.log('Script started successfully');
 
 // Manage Red door
-WA.room.onEnterZone('doorRedZoneOpened', () => WA.room.hideLayer('doorRedClosed'));
-WA.room.onEnterZone('doorRedZoneClosed', () => WA.room.showLayer('doorRedClosed'));
+WA.room.onEnterZone('doorRedZoneOpened', () => {
+    if(!WA.player.tags.includes('home_red')) return;
+    WA.room.hideLayer('doorRedClosed');
+});
+WA.room.onEnterZone('doorRedZoneClosed', () => {
+    WA.room.showLayer('doorRedClosed');
+});
 
 // Manage Blue door
-WA.room.onEnterZone('doorBlueZoneOpened', () => WA.room.hideLayer('doorBlueClosed'));
-WA.room.onEnterZone('doorBlueZoneClosed', () => WA.room.showLayer('doorBlueClosed'));
+WA.room.onEnterZone('doorBlueZoneOpened', () => {
+    if(!WA.player.tags.includes('home_blue')) return;
+    WA.room.hideLayer('doorBlueClosed');
+});
+WA.room.onEnterZone('doorBlueZoneClosed', () => {
+    WA.room.showLayer('doorBlueClosed');
+});
 
 // Manage Purple door
-WA.room.onEnterZone('doorPurpleZoneOpened', () => WA.room.hideLayer('doorPurpleClosed'));
-WA.room.onEnterZone('doorPurpleZoneClosed', () => WA.room.showLayer('doorPurpleClosed'));
+WA.room.onEnterZone('doorPurpleZoneOpened', () => {
+    if(!WA.player.tags.includes('home_purple')) return;
+    WA.room.hideLayer('doorPurpleClosed');
+});
+WA.room.onEnterZone('doorPurpleZoneClosed', () => {
+    WA.room.showLayer('doorPurpleClosed');
+});
 
 // Manage Yellow door
 WA.room.onEnterZone('doorYellowZoneOpened', () => {
-    console.log('doorYellowZoneOpened => onEnterZone')
-    WA.room.hideLayer('doorYellowClosed')
+    if(!WA.player.tags.includes('home_yellow')) return;
+    WA.room.hideLayer('doorYellowClosed');
 });
 WA.room.onEnterZone('doorYellowZoneClosed', () => {
-    console.log('doorYellowZoneClosed => onEnterZone')
-    WA.room.showLayer('doorYellowClosed')
+    WA.room.showLayer('doorYellowClosed');
 });
